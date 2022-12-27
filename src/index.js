@@ -49,7 +49,8 @@ class Game extends React.Component {
     this.state = {
       history: [
         {
-          squares: Array(9).fill(null)
+          squares: Array(9).fill(null), 
+          pos: [],
         }
       ],
       stepNumber: 0,
@@ -61,22 +62,37 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
+    const pos = current.pos.slice(0, current.pos.length + 1);
+
+    if (calculateWinner(squares)|| squares[i]) {
       return;
     }
     squares[i] = this.state.xIsNext ? "X" : "O";
+    pos.push({row: Math.floor(i / 3) + 1, col: i % 3 + 1});
     this.setState({
       history: history.concat([
         {
-          squares: squares
+          squares: squares,
+          pos: pos,
         }
       ]),
       stepNumber: history.length,
-      xIsNext: !this.state.xIsNext
+      xIsNext: !this.state.xIsNext,
+      pos: i,
     });
   }
 
-  jumpTo(step) {
+  jumpTo(step, buttonId) {
+    
+    let i;
+    //console.log(this.state.history.length);
+    for(i = 0; i < this.state.history.length; i++)
+    {
+      //console.log(`step ${i}`);
+      //console.log(i);
+      document.getElementById(`step ${i}`).style.fontWeight = 'normal';
+    }
+    document.getElementById(buttonId).style.fontWeight = 'bold';
     this.setState({
       stepNumber: step,
       xIsNext: (step % 2) === 0
@@ -87,14 +103,22 @@ class Game extends React.Component {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
-
+    // const pos = this.state.pos;
+    // const col = pos % 3, row = Math.round(pos / 3);
+    const pos = history.pos;
+    //console.log(pos.length);
     const moves = history.map((step, move) => {
+      
+      //console.log(step.pos[step.pos.length-1]["row"]);
+      const pos = step.pos[step.pos.length - 1];
       const desc = move ?
-        'Go to move #' + move :
+        'Go to move #' + move + " (" + pos["col"] + ", " + pos["row"] + ")"://; + ", (" + col + ", " + row + ")":
         'Go to game start';
+      const buttonId = `step ${move}`;
+      //const isActive = false;
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button id={buttonId} onClick={() => this.jumpTo(move, buttonId)}>{desc}</button>
         </li>
       );
     });
