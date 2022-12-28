@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
@@ -7,6 +7,7 @@ function Square(props) {
     <button className="square" onClick={props.onClick}>
       {props.value}
     </button>
+    
   );
 }
 
@@ -21,6 +22,8 @@ class Board extends React.Component {
     );
   }
 
+  
+
   render() {
     const board = [];
     let i, j, counter = 0;
@@ -33,7 +36,6 @@ class Board extends React.Component {
       }
       board.push(<div className='board-row' key={i}>{row}</div>);
     }
-    console.log(board.toString());
     return (
       <div>
         {board}
@@ -43,8 +45,11 @@ class Board extends React.Component {
 }
 
 class Game extends React.Component {
+  
+
   constructor(props) {
     super(props);
+    
     this.state = {
       history: [
         {
@@ -57,6 +62,12 @@ class Game extends React.Component {
     };
   }
 
+  reverseClick(){
+    this.setState({
+      isReversed: !this.state.isReversed,
+    })
+  }
+  
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
@@ -99,16 +110,16 @@ class Game extends React.Component {
   }
 
   render() {
+    // this.setState({
+    //   isReversed: false,
+    // });
+    
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
-    // const pos = this.state.pos;
-    // const col = pos % 3, row = Math.round(pos / 3);
     const pos = history.pos;
     //console.log(pos.length);
     const moves = history.map((step, move) => {
-      
-      //console.log(step.pos[step.pos.length-1]["row"]);
       const pos = step.pos[step.pos.length - 1];
       const desc = move ?
         'Go to move #' + move + " (" + pos["col"] + ", " + pos["row"] + ")"://; + ", (" + col + ", " + row + ")":
@@ -139,7 +150,8 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <ol style={{'flex-direction': (this.state.isReversed ? 'column-reverse' : 'column')}}>{moves}</ol>
+          <button onClick={() => this.reverseClick()}>reverse</button>
         </div>
       </div>
     );
