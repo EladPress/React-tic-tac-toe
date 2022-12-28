@@ -199,5 +199,16 @@ function calculateWinner(squares) {
       return squares[a];
     }
   }
+
+  //let isBoardFull = true;
+  for(let i = 0; i < 9; i++)
+  {
+    if(squares[i] == null) 
+    {
+      return null;
+    } 
+  }
+  
+  alert("draw");
   return null;
 }
