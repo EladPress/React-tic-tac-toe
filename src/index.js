@@ -14,14 +14,26 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 exports.__esModule = true;
-var react_1 = require("react");
-var client_1 = require("react-dom/client");
+var jsx_runtime_1 = require("react/jsx-runtime");
+//import React, { useState } from 'react';
+var React = require("react");
+//import ReactDOM from 'react-dom/client';
+var ReactDOM = require("react-dom/client");
 require("./index.css");
 function Square(props) {
-    return (<button className="square" onClick={props.onClick} id={"square " + props.index}>
-      {props.value}
-    </button>);
+    return ((0, jsx_runtime_1.jsx)("button", __assign({ className: "square", onClick: props.onClick, id: "square " + props.index }, { children: props.value })));
 }
 var Board = /** @class */ (function (_super) {
     __extends(Board, _super);
@@ -30,7 +42,7 @@ var Board = /** @class */ (function (_super) {
     }
     Board.prototype.renderSquare = function (i) {
         var _this = this;
-        return (<Square index={i} value={this.props.squares[i]} onClick={function () { return _this.props.onClick(i); }}/>);
+        return ((0, jsx_runtime_1.jsx)(Square, { index: i, value: this.props.squares[i], onClick: function () { return _this.props.onClick(i); } }));
     };
     Board.prototype.render = function () {
         var board = [];
@@ -40,14 +52,12 @@ var Board = /** @class */ (function (_super) {
             for (j = 0; j < 3; j++) {
                 row.push(this.renderSquare(counter++));
             }
-            board.push(<div className='board-row' key={i}>{row}</div>);
+            board.push((0, jsx_runtime_1.jsx)("div", __assign({ className: 'board-row' }, { children: row }), i));
         }
-        return (<div>
-        {board}
-      </div>);
+        return ((0, jsx_runtime_1.jsx)("div", { children: board }));
     };
     return Board;
-}(react_1["default"].Component));
+}(React.Component));
 var Game = /** @class */ (function (_super) {
     __extends(Game, _super);
     function Game(props) {
@@ -125,9 +135,7 @@ var Game = /** @class */ (function (_super) {
                 'Go to game start';
             var buttonId = "step ".concat(move);
             //const isActive = false;
-            return (<li key={move}>
-          <button id={buttonId} onClick={function () { return _this.jumpTo(move, buttonId); }}>{desc}</button>
-        </li>);
+            return ((0, jsx_runtime_1.jsx)("li", { children: (0, jsx_runtime_1.jsx)("button", __assign({ id: buttonId, onClick: function () { return _this.jumpTo(move, buttonId); } }, { children: desc })) }, move));
         });
         var status;
         if (winner) {
@@ -136,22 +144,13 @@ var Game = /** @class */ (function (_super) {
         else {
             status = "Next player: " + (this.state.xIsNext ? "X" : "O");
         }
-        return (<div className="game">
-        <div className="game-board">
-          <Board squares={current.squares} onClick={function (i) { return _this.handleClick(i); }}/>
-        </div>
-        <div className="game-info">
-          <div>{status}</div>
-          <ol style={{ 'flexDirection': (this.state.isReversed ? 'column-reverse' : 'column') }}>{moves}</ol>
-          <button onClick={function () { return _this.reverseClick(); }}>reverse</button>
-        </div>
-      </div>);
+        return ((0, jsx_runtime_1.jsxs)("div", __assign({ className: "game" }, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: "game-board" }, { children: (0, jsx_runtime_1.jsx)(Board, { squares: current.squares, onClick: function (i) { return _this.handleClick(i); } }) })), (0, jsx_runtime_1.jsxs)("div", __assign({ className: "game-info" }, { children: [(0, jsx_runtime_1.jsx)("div", { children: status }), (0, jsx_runtime_1.jsx)("ol", __assign({ style: { 'flexDirection': (this.state.isReversed ? 'column-reverse' : 'column') } }, { children: moves })), (0, jsx_runtime_1.jsx)("button", __assign({ onClick: function () { return _this.reverseClick(); } }, { children: "reverse" }))] }))] })));
     };
     return Game;
-}(react_1["default"].Component));
+}(React.Component));
 // ========================================
-var root = client_1["default"].createRoot(document.getElementById("root"));
-root.render(<Game />);
+var root = ReactDOM.createRoot(document.getElementById("root"));
+root.render((0, jsx_runtime_1.jsx)(Game, {}));
 function highlightWin(squares, toHighlight) {
     for (var i = 0; i < toHighlight.length; i++) {
         document.getElementById("square " + toHighlight[i]).style.borderWidth = '2px';

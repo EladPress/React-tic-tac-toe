@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom/client';
+//import React, { useState } from 'react';
+import * as React from 'react';
+//import ReactDOM from 'react-dom/client';
+import * as ReactDOM from 'react-dom/client';
 import './index.css';
 
 function Square(props: any) {
