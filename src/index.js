@@ -28,7 +28,7 @@ const react_1 = require("react");
 const ReactDOM = __importStar(require("react-dom/client"));
 require("./index.css");
 const board_1 = require("./board");
-const square_1 = require("./square");
+const functions_1 = require("./functions");
 function Game(props) {
     const [history, setHistory] = (0, react_1.useState)([
         {
@@ -48,22 +48,11 @@ function Game(props) {
         const current = history[history.length - 1];
         const squares = current.squares.slice();
         const pos = current.pos.slice(0, current.pos.length + 1);
-        if ((0, square_1.calculateWinner)(squares) || squares[i]) {
+        if ((0, functions_1.calculateWinner)(squares) || squares[i]) {
             return;
         }
         squares[i] = xIsNext ? "X" : "O";
         pos.push({ row: Math.floor(i / 3) + 1, col: i % 3 + 1 });
-        // this.setState({
-        //   history: history.concat([
-        //     {
-        //       squares: squares,
-        //       pos: pos,
-        //     }
-        //   ]),
-        //   stepNumber: history.length,
-        //   xIsNext: !xIsNext,
-        //   pos: i,
-        // });
         setHistory(history.concat([{
                 squares: squares,
                 pos: pos,
@@ -89,7 +78,7 @@ function Game(props) {
     }
     //const history = this.state.history;
     const current = history[stepNumber];
-    const winner = (0, square_1.calculateWinner)(current.squares);
+    const winner = (0, functions_1.calculateWinner)(current.squares);
     const moves = history.map((step, move) => {
         const pos = step.pos[step.pos.length - 1];
         const desc = move ?

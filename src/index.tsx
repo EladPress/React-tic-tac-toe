@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './index.css';
 import { Board } from './board'
-import { calculateWinner } from './square';
-
+import { calculateWinner } from './functions';
 
 function Game(props: any) {
-
 
   const [history, setHistory] = useState([
     {
@@ -23,7 +21,6 @@ function Game(props: any) {
     setIsReversed(!isReversed);
   }
 
-
   function handleClick(i: number) {
     //const history: any = history.slice(0, this.state.stepNumber + 1);
     setHistory(history.slice(0, stepNumber + 1));
@@ -36,14 +33,14 @@ function Game(props: any) {
     }
     squares[i] = xIsNext ? "X" : "O";
     pos.push({ row: Math.floor(i / 3) + 1, col: i % 3 + 1 });
-    
+
     setHistory(history.concat([{
       squares: squares,
       pos: pos,
     }]));
     setStepNumber(history.length);
     setXIsNext(!xIsNext);
-    
+
   }
 
   function jumpTo(step: any, buttonId: any) {

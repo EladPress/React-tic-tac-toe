@@ -1,6 +1,4 @@
 import * as React from 'react';
-//import ReactDOM from 'react-dom/client';
-import * as ReactDOM from 'react-dom/client';
 import './index.css';
 
 function Square(props: any) {
@@ -12,7 +10,6 @@ function Square(props: any) {
         >
             {props.value}
         </button>
-
     );
 }
 
@@ -52,4 +49,4 @@ function calculateWinner(squares: any) {
     return null;
 }
 
-export {Square, highlightWin, calculateWinner}
+export { Square, highlightWin, calculateWinner }
