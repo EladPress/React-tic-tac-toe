@@ -1,15 +1,23 @@
+import { Button, colors} from '@mui/material';
 import * as React from 'react';
 import './index.css';
 
 function Square(props: any) {
     return (
-        <button
+        <Button
+            sx={{
+                bgcolor: colors.red[500],
+                color: '#ffffff'
+            }}
             className="square"
             onClick={props.onClick}
             id={"square " + props.index}
+            variant="contained"
+            // color="primary.darker"
         >
             {props.value}
-        </button>
+        </Button>
+        
     );
 }
 

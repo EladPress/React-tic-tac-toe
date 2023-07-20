@@ -3,6 +3,9 @@ import * as ReactDOM from 'react-dom/client';
 import './index.css';
 import { Board } from './board'
 import { calculateWinner } from './functions';
+import { Button, ThemeProvider} from '@mui/material';
+import { theme } from './Theme';
+//import { ThemeProvider } from '@emotion/react';
 
 function Game(props: any) {
 
@@ -77,7 +80,7 @@ function Game(props: any) {
     //const isActive = false;
     return (
       <li key={move}>
-        <button id={buttonId} onClick={() => jumpTo(move, buttonId)}>{desc}</button>
+        <Button variant="outlined" color="primary" id={buttonId} onClick={() => jumpTo(move, buttonId)}>{desc}</Button>
       </li>
     );
   });
@@ -110,6 +113,6 @@ function Game(props: any) {
 // ========================================
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
-root.render(<Game />);
+root.render(<ThemeProvider theme={theme}><Game /></ThemeProvider>);
 
 
