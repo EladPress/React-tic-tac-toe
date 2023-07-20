@@ -28,3 +28,11 @@ jobs:
         cache: 'npm'
     - run: npm i
     - run: npm run build --if-present
+    - name: Build and Push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v4
+      with:
+        image: eladpress/elad-press
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+      
