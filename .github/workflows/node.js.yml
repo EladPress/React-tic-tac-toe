@@ -26,6 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - run: echo ${{ github.ref_name }}
     - run: npm i
     - run: npm run build --if-present
     - name: Build and Push Docker Image
@@ -35,4 +36,5 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+        tag:
       
