@@ -9,7 +9,7 @@ function Square(props) {
     </button>
   );
 }
-//commentssss
+//commentsss
 class Board extends React.Component {
   renderSquare(i) {
     return (
