@@ -1,0 +1,7 @@
+branches: ['main', 'semver']
+ci: true
+plugins:
+- '@semantic-release/commit-analyzer'
+- '@semantic-release/release-notes-generator'
+- name: '@semantic-release/npm'
+  npmPublish: false
