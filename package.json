@@ -3,6 +3,7 @@
   "version": "2.1.1",
   "private": true,
   "dependencies": {
+    "@eladpress/semantic-release-gitflow": "^1.1.0",
     "@semantic-release/git": "github:semantic-release/git",
     "@semantic-release/npm": "github:semantic-release/npm",
     "@testing-library/jest-dom": "^5.16.5",
