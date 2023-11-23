@@ -45,7 +45,8 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         tag: "${{ env.branch_name }}-${{env.build_number}}"
     - name: setup semantic-release
-      run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog @\eladpress/semantic-release-gitflow -D
+      run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog -D; npm i @eladpress/semantic-release-gitflow -D
+
     - name: release
       run: npx semantic-release
     - name: check something
