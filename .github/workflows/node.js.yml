@@ -46,7 +46,7 @@ jobs:
         tag: "${{ env.branch_name }}-${{env.build_number}}"
     - name: setup semantic-release
       run: npm install -g semantic-release@18.0.1 @semantic-release/git @semantic-release/changelog -D; npm i @eladpress/semantic-release-gitflow@^1.2.0-testing.8 -D
-
+    - run: npm -g ls -l
     - name: release
       run: npx semantic-release
     - name: check something
