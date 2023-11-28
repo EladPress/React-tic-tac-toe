@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-
+//testing sdklfjdlk
 function Square(props) {
   return (
     <button className="square" onClick={props.onClick}>
@@ -9,7 +9,7 @@ function Square(props) {
     </button>
   );
 }
-
+//commentsswssdsssasdsdjslkjsjjlksjdk;lsjdkljdlkjaslkdjaslalskdjasl
 class Board extends React.Component {
   renderSquare(i) {
     return (
